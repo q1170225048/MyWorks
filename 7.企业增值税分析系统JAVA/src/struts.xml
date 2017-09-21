@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 2.1//EN" "http://struts.apache.org/dtds/struts-2.1.dtd">
+<struts>
+<constant name="struts.devMode" value="true"/>
+	<package name="user" namespace="/" extends="struts-default,json-default">  
+        
+         <action name="Login" class="com.fengxing.action.Login" method="login">
+            <result name="loginSuccess">index.html</result>      
+            <result name="login">login.html</result>             
+        </action> 
+        <action name="listArea" method="listArea" class="com.fengxing.action.DataAction">  
+            <result type="json">  
+                <param name="root">map</param>  
+            </result>  
+        </action>   
+        <action name="listArea1" method="listArea1" class="com.fengxing.action.DataAction">  
+            <result type="json">  
+                <param name="root">map1</param>  
+            </result>  
+        </action>   
+         <action name="listArea2" method="listArea2" class="com.fengxing.action.DataAction">  
+            <result type="json">  
+                <param name="root">map2</param>  
+            </result>  
+        </action>  
+    </package>  
+</struts>    

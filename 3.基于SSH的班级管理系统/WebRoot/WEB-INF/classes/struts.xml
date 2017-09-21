@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 2.1//EN" "http://struts.apache.org/dtds/struts-2.1.dtd">
+<struts>
+<!-- 把Struts的action交给spring托管 -->
+    <constant name="struts.objectFactory" value="spring"/>
+    <!--  设置struts为开发模式，这样能够及时的响应修改  不过没有搞懂是什么意思-->
+    <constant name="struts.devMode" value="false"/>
+    <constant name="struts.il8n.encoding" value="UTF-8"></constant>
+    <!--设置上传文件大小 （20MB）-->
+    <constant name="struts.multipart.maxSize" value="2097152"></constant>
+    <!--    定位视图资源的根路径 -->
+    <!--    <constant name="struts.convention.result.path" value="/WEB-INF/"></constant> -->
+    <!--设置struts配置文件修改以后系统是否自动重新加载该文件默认为false但是在开发环境下还是要设置成true-->
+    <constant name="struts.configuration.xml.reload" value="true"></constant>
+<!--************************************************************************************************************ -->
+
+	<package name="default" namespace="/" extends="struts-default,json-default">
+		<action name="LoginAction" class="LoginAction"><!-- name是jsp页面识别的名字，class是action中类的名字 -->
+			<result name="success">home.jsp</result>
+			<result name="error">login.html</result>
+		</action>
+		<!-- 班级管理 -->
+		<action name="ClassInformationAction" class="ClassInformationAction">
+		    <result name="success">classInformation.jsp</result>
+		</action>
+		
+		<action name="ClassAddAction" class="ClassAddAction">
+		    <result name="success">classAdd.jsp</result>
+		</action>
+		
+		<action name="ClassEditAction" class="ClassEditAction">
+		    <result name="success">classInformation.jsp</result>
+		</action>
+		
+		<action name="ClassDelAction" class="ClassDelAction">		
+		    <result name="success">classInformation.jsp</result>
+		</action>
+		
+		<!-- 学生管理 -->
+		<action name="StudentInformationAction" class="StudentInformationAction">
+		    <result name="success">studentInformation.jsp</result>
+		</action>
+		
+		<action name="StudentAddAction" class="StudentAddAction">
+		    <result name="success">studentAdd.jsp</result>
+		</action>
+		
+		<action name="StudentEditAction" class="StudentEditAction">
+		    <result name="success">studentInformation.jsp</result>
+		</action>
+		
+		<action name="StudentDelAction" class="StudentDelAction">		
+		    <result name="success">studentInformation.jsp</result>
+		</action>
+		
+		<!-- 课程管理 -->
+		<action name="CourseInformationAction" class="CourseInformationAction">
+		    <result name="success">courseInformation.jsp</result>
+		</action>
+		
+		<action name="CourseAddAction" class="CourseAddAction">
+		    <result name="success">courseAdd.jsp</result>
+		</action>
+		
+		<action name="CourseEditAction" class="CourseEditAction">
+		    <result name="success">courseInformation.jsp</result>
+		</action>
+		
+		<action name="CourseDelAction" class="CourseDelAction">		
+		    <result name="success">courseInformation.jsp</result>
+		</action>
+		
+		<!-- 成绩录入 -->
+		<action name="FindgradeAction" class="FindgradeAction">
+		    <result name="success">gradeInput.jsp</result>
+		</action>
+		
+		<action name="GradeQueryAction" class="GradeQueryAction">
+		    <result name="success">gradeQuery.jsp</result>
+		</action>
+		<action name="GradeCourseAction" class="GradeCourseAction">
+		    <result name="success">gradeStatistics.jsp</result>
+		</action>
+		<action name="Find_course_grade" class="Find_course_grade" >
+			<result name="success">gradeStatistics.jsp</result>
+		</action>
+		<action name="Save_grade" class="Save_grade" >
+			<result type="json">
+	    		<param name="root">result</param>
+	    	</result>
+		</action>
+		
+	</package>
+
+</struts>    

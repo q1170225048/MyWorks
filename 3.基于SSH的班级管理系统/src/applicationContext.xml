@@ -1,0 +1,189 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:context="http://www.springframework.org/schema/context"
+    xmlns:aop="http://www.springframework.org/schema/aop"
+    xmlns:tx="http://www.springframework.org/schema/tx"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans
+           http://www.springframework.org/schema/beans/spring-beans.xsd
+           http://www.springframework.org/schema/context
+           http://www.springframework.org/schema/context/spring-context.xsd
+           http://www.springframework.org/schema/aop
+           http://www.springframework.org/schema/aop/spring-aop.xsd
+           http://www.springframework.org/schema/tx 
+           http://www.springframework.org/schema/tx/spring-tx.xsd ">
+   <context:annotation-config /> 
+    <context:component-scan base-package="com.swz" />
+    <aop:aspectj-autoproxy proxy-target-class = "true"/>
+
+
+	<bean id="dataSource"
+		class="org.apache.commons.dbcp.BasicDataSource">
+		<property name="driverClassName"
+			value="net.sourceforge.jtds.jdbc.Driver">
+		</property>
+		<property name="url"
+			value="jdbc:jtds:sqlserver://localhost:1433/ClassManagement">
+		</property>
+		<property name="username" value="sa"></property>
+		<property name="password" value="123456"></property>
+	</bean>
+	<bean id="sessionFactory"
+		class="org.springframework.orm.hibernate3.annotation.AnnotationSessionFactoryBean">
+		<property name="dataSource">
+			<ref bean="dataSource" />
+		</property>
+		<property name="hibernateProperties">
+			<props>
+				<prop key="hibernate.dialect">
+					org.hibernate.dialect.SybaseDialect
+				</prop>
+				<prop key="hibernate.hbm2ddl.auto">update</prop>
+			</props>
+		</property>
+		<property name="annotatedClasses">
+			<list>
+				<value>com.gkt.entity.Grade</value>
+				<value>com.gkt.entity.Course</value>
+				<value>com.gkt.entity.Student</value>
+				<value>com.gkt.entity.Classunit</value></list>
+		</property></bean>
+	<bean id="GradeDAO" class="com.gkt.dao.GradeDAO">
+		<property name="sessionFactory"> 
+			<ref bean="sessionFactory" /> 
+		</property> 
+		<property name="sessionFactory1">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean><!-- 代表一个java类，id是此类的唯一标识，name标识类里面需要注入的变量名，bean代表此变量名的类型 -->
+	<bean id="CourseDAO" class="com.gkt.dao.CourseDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="StudentDAO" class="com.gkt.dao.StudentDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="ClassunitDAO" class="com.gkt.dao.ClassunitDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	
+	<!-- Service -->
+	<bean id="ClassunitServiceImpl" class="com.gkt.serviceImpl.ClassunitServiceImpl">
+		<property name="classunitDAO" ref="ClassunitDAO"/>
+	</bean>
+	<bean id="StudentServiceImpl" class="com.gkt.serviceImpl.StudentServiceImpl">
+		<property name="studentDAO" ref="StudentDAO"/>
+	</bean>
+	<bean id="CourseServiceImpl" class="com.gkt.serviceImpl.CourseServiceImpl">
+		<property name="courseDAO" ref="CourseDAO"/>
+	</bean>
+	<bean id="GradeServiceImpl" class="com.gkt.serviceImpl.GradeServiceImpl">
+		<property name="gradeDAO" ref="GradeDAO"/>
+	</bean>
+	
+	
+	<!-- 登陆 -->
+	<bean id="loginService" class="com.gkt.serviceImpl.LoginServiceImpl">
+		<property name="studentDAO">
+			<ref bean="StudentDAO" />
+		</property>
+	</bean>
+	<bean id="LoginAction" class="com.gkt.action.LoginAction">
+		<property name="loginService">
+			<ref bean="loginService" />
+		</property>
+	</bean>
+	
+	<!-- 查询班级信息 -->
+	<bean id="ClassInformationAction" class="com.gkt.action.ClassInformationAction">
+		<property name="classunitService" ref="ClassunitServiceImpl"/>
+	</bean>
+	<!-- 新建班级 -->
+	<bean id="ClassAddAction" class="com.gkt.action.ClassAddAction">
+		<property name="classunitService" ref="ClassunitServiceImpl"/>
+	</bean>
+	<!-- 修改班级信息 -->
+	<bean id="ClassEditAction" class="com.gkt.action.ClassEditAction">
+		<property name="classunitService" ref="ClassunitServiceImpl"/>
+	</bean>
+	<!-- 删除班级信息 -->
+	<bean id="ClassDelAction" class="com.gkt.action.ClassDelAction">
+		<property name="classunitService" ref="ClassunitServiceImpl"/>
+	</bean>
+	
+	<!-- 查询学生信息 -->
+	<bean id="StudentInformationAction" class="com.gkt.action.StudentInformationAction">
+		<property name="studentService" ref="StudentServiceImpl"/>
+	</bean>
+	<!-- 新建学生 -->
+	<bean id="StudentAddAction" class="com.gkt.action.StudentAddAction">
+		<property name="studentService" ref="StudentServiceImpl"/>
+		<property name="classunitDAO" ref="ClassunitDAO"/>
+	</bean>
+	<!-- 修改学生信息 -->
+	<bean id="StudentEditAction" class="com.gkt.action.StudentEditAction">
+		<property name="studentService" ref="StudentServiceImpl"/>
+		<property name="classunitDAO" ref="ClassunitDAO"/>
+	</bean>
+	<!-- 删除学生信息 -->
+	<bean id="StudentDelAction" class="com.gkt.action.StudentDelAction">
+		<property name="studentService" ref="StudentServiceImpl"/>
+	</bean>
+	
+	<!-- 查询课程信息 -->
+	<bean id="CourseInformationAction" class="com.gkt.action.CourseInformationAction">
+		<property name="courseService" ref="CourseServiceImpl"/>
+	</bean>
+	<!-- 新增课程 -->
+	<bean id="CourseAddAction" class="com.gkt.action.CourseAddAction">
+		<property name="courseService" ref="CourseServiceImpl"/>
+	</bean>
+	<!-- 修改课程信息 -->
+	<bean id="CourseEditAction" class="com.gkt.action.CourseEditAction">
+		<property name="courseService" ref="CourseServiceImpl"/>
+	</bean>
+	<!-- 删除课程信息 -->
+	<bean id="CourseDelAction" class="com.gkt.action.CourseDelAction">
+		<property name="courseService" ref="CourseServiceImpl"/>
+	</bean>
+	
+	<!-- 成绩录入 -->
+	<bean id="FindgradeAction" class="com.gkt.action.FindgradeAction">
+		<property name="gradeService" ref="GradeServiceImpl"/>
+		<property name="studentService" ref="StudentServiceImpl"/>
+		<property name="courseService" ref="CourseServiceImpl"/>
+		<property name="classunitService" ref="ClassunitServiceImpl"/>
+	</bean>
+	<!-- 学生成绩查询 -->
+	<bean id="GradeQueryAction" class="com.gkt.action.GradeQueryAction">
+		<property name="studentService" ref="StudentServiceImpl"/>
+		<property name="gradeService" ref="GradeServiceImpl"/>
+		<property name="courseService" ref="CourseServiceImpl"/>
+		<property name="classunitService" ref="ClassunitServiceImpl"/>
+	</bean>
+	<bean id="GradeCourseAction" class="com.gkt.action.GradeCourseAction">
+		<property name="studentService" ref="StudentServiceImpl"/>
+		<property name="gradeService" ref="GradeServiceImpl"/>
+		<property name="courseService" ref="CourseServiceImpl"/>
+		<property name="classService" ref="ClassunitServiceImpl"/>
+	</bean>
+	<!--查询成绩统计  -->
+	<bean id="Find_course_grade" class="com.gkt.action.Find_course_grade">
+		<property name="courseService" ref="CourseServiceImpl"/>
+		
+		<property name="classService" ref="ClassunitServiceImpl"/>
+		<property name="gradeService" ref="GradeServiceImpl"/>
+	</bean>
+	<bean id="Save_grade" class="com.gkt.action.Save_grade">
+		<property name="gradeService" ref="GradeServiceImpl"/>
+		<property name="classService" ref="ClassunitServiceImpl"/>
+		<property name="courseService" ref="CourseServiceImpl"/>
+		<property name="studentService" ref="StudentServiceImpl"/>
+	</bean>
+	
+	</beans>

@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 2.1//EN" "http://struts.apache.org/dtds/struts-2.1.dtd">
+<struts>
+	<constant name="struts.devMode" value="true"/>
+	<package name="userjson" namespace="/" extends="json-default">  
+        <action name="userJSONAction_*" method="{1}" class="action.LoginAction">  
+            <result type="json">  
+                <param name="root">result</param>  
+            </result>  
+        </action>   
+    </package>  
+    <package name="ljson" namespace="/leftPages" extends="json-default">  
+        <action name="questJSONAction_*" method="{1}" class="action.QestAction">  
+            <result type="json">  
+                <param name="root">result</param>  
+            </result>  
+        </action>  
+    </package>  
+	<package name="action" extends="struts-default" namespace="/">
+        <action name="LoginAction" class="action.LoginAction" method="login">
+            <result name="loginSuccess">main.jsp</result>      
+            <result name="login">login.jsp</result>             
+        </action>
+        <action name="regist" class="action.LoginAction" method="add">  
+            <result name="input">/register.html</result>  
+            <result name="success">/zhuce.jsp</result>  
+        </action>  
+        <action name="add" class="action.QestAction" method="add">  
+            <result name="input">/ask.jsp</result>  
+            <result name="success">/ask.jsp</result>  
+        </action>  
+        
+    </package>
+    <package name="PassAction" extends="struts-default" namespace="/xgmm">
+    	<action name="passChange" class="action.LoginAction" method="passChange">  
+            <result name="input">/xgmm/xgmm.jsp</result>  
+            <result name="success">/xgmm/xgmm.jsp</result>  
+        </action>  
+    </package>
+    <package name="QestAction" extends="struts-default,json-default" namespace="/tjcx">
+    	<action name="QestAction" class="action.QestAction" method="search">  
+            <result name="success">/tjcx/tjcx_shouye.jsp</result>  
+        </action>  
+        <action name="test" class="test.Test" >  
+            <result name="error">/tjcx/tjcx_shouye.jsp</result>  
+            <result name="success">/tjcx/tjcx_shouye.jsp</result>  
+        </action>  
+    </package>
+</struts>    

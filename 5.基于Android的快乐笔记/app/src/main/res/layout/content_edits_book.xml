@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:Android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    Android:layout_width="fill_parent"
+    Android:layout_height="fill_parent"
+    Android:fadingEdge="vertical">
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:id="@+id/content_edits_book"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingBottom="@dimen/activity_vertical_margin"
+        android:paddingLeft="@dimen/activity_horizontal_margin"
+        android:paddingRight="@dimen/activity_horizontal_margin"
+        android:paddingTop="@dimen/activity_vertical_margin"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"
+        tools:context="com.example.fanxiaofan.reading_one.AddBook"
+        tools:showIn="@layout/activity_edit_sbook">
+
+
+        <android.support.design.widget.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:id="@+id/booknowE"
+            android:layout_height="wrap_content">
+
+            <AutoCompleteTextView
+                android:id="@+id/booknoE"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="书籍编号(不可修改)"
+                android:inputType="text"
+                android:maxLines="1"
+                android:singleLine="true"
+                android:editable="false"
+                android:clickable="false"
+                android:cursorVisible="false"
+                android:focusable="false"
+                android:focusableInTouchMode="false" />
+
+        </android.support.design.widget.TextInputLayout>
+
+        <android.support.design.widget.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/booknowE"
+            android:layout_centerHorizontal="true"
+            android:id="@+id/booknamewE">
+
+            <AutoCompleteTextView
+                android:id="@+id/bookNameE"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="书籍名称"
+                android:inputType="text"
+                android:maxLines="1"
+                android:singleLine="true"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true" />
+        </android.support.design.widget.TextInputLayout>
+
+        <android.support.design.widget.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/booknamewE"
+            android:layout_centerHorizontal="true"
+            android:id="@+id/bookauthorwE">
+
+            <AutoCompleteTextView
+                android:id="@+id/bookauthorE"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="作者"
+                android:inputType="text"
+                android:maxLines="1"
+                android:singleLine="true"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true" />
+        </android.support.design.widget.TextInputLayout>
+
+        <android.support.design.widget.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/bookauthorwE"
+            android:layout_centerHorizontal="true"
+            android:id="@+id/bookpresswE">
+
+            <AutoCompleteTextView
+                android:id="@+id/bookpressE"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="出版社"
+                android:inputType="text"
+                android:maxLines="1"
+                android:singleLine="true"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true" />
+        </android.support.design.widget.TextInputLayout>
+        <android.support.design.widget.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/bookpresswE"
+            android:layout_centerHorizontal="true"
+            android:id="@+id/bookISBNwE">
+
+            <AutoCompleteTextView
+                android:id="@+id/bookISBNE"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="ISBN"
+                android:inputType="text"
+                android:maxLines="1"
+                android:singleLine="true"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true" />
+        </android.support.design.widget.TextInputLayout>
+        <android.support.design.widget.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/bookISBNwE"
+            android:layout_centerHorizontal="true"
+            android:id="@+id/bookclasswE">
+
+            <AutoCompleteTextView
+                android:id="@+id/bookclassE"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="书籍分类"
+                android:inputType="text"
+                android:maxLines="1"
+                android:singleLine="true"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true" />
+        </android.support.design.widget.TextInputLayout>
+
+        <Button
+            android:text="修改"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/bookclasswE"
+            android:id="@+id/button5E"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:onClick="btnEditSaveBook_Click" />
+    </RelativeLayout>
+</ScrollView>
